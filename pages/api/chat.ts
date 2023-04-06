@@ -1,6 +1,6 @@
 import { ChatBody, Message } from '@/types/chat';
 import { DEFAULT_SYSTEM_PROMPT } from '@/utils/app/const';
-import { OpenAIError, OpenAIStream, TurtleStream } from '@/utils/server';
+import { OpenAIError, OpenAIStream, BessoStream } from '@/utils/server';
 import tiktokenModel from '@dqbd/tiktoken/encoders/cl100k_base.json';
 import { Tiktoken, init } from '@dqbd/tiktoken/lite/init';
 // @ts-expect-error
@@ -46,8 +46,8 @@ const handler = async (req: Request): Promise<Response> => {
     encoding.free();
 
     var stream = null;
-    if (model.id === OpenAIModelID.TURTLE) {
-      stream = await TurtleStream(model, promptToSend, key, messagesToSend);
+    if (model.id === OpenAIModelID.BESSO) {
+      stream = await BessoStream(model, promptToSend, key, messagesToSend);
     } else {
       stream = await OpenAIStream(model, promptToSend, key, messagesToSend);
     }
