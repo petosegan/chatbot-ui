@@ -5,7 +5,7 @@ import {
   ParsedEvent,
   ReconnectInterval,
 } from 'eventsource-parser';
-import { OPENAI_API_HOST, TURTLE_HOST } from '../app/const';
+import { OPENAI_API_HOST, BESSO_HOST } from '../app/const';
 
 export class OpenAIError extends Error {
   type: string;
@@ -22,7 +22,7 @@ export class OpenAIError extends Error {
 }
 
 
-export const TurtleStream = async (
+export const BessoStream = async (
   model: OpenAIModel,
   systemPrompt: string,
   key: string,
@@ -39,7 +39,7 @@ export const TurtleStream = async (
     ]
   })
   console.log(chatBody)
-  const res = await fetch(`${TURTLE_HOST}/v1/chat/completions`, {
+  const res = await fetch(`${BESSO_HOST}/v1/chat/completions`, {
     headers: {
       'Content-Type': 'application/json',
       Authorization: `Bearer ${key ? key : process.env.OPENAI_API_KEY}`,
